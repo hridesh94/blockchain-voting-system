@@ -12,11 +12,8 @@ async function main() {
   const voting = await Voting.deploy(voterRegistration.target); 
   await voting.waitForDeployment();
 
-  // Initialize Voting contract from VoterRegistration as the admin
+  // Set the votingContract address in VoterRegistration as the admin
   await voterRegistration.connect(deployer).setVotingContract(voting.target); 
-
-  // Call initialize() on Voting contract to complete the setup
-  await voting.initialize(); 
 
   console.log("VoterRegistration deployed to:", voterRegistration.target);
   console.log("Voting deployed to:", voting.target);

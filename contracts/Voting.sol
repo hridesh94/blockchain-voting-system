@@ -11,7 +11,7 @@ contract Voting {
         bool exists;
     }
     
-    VoterRegistration public voterRegistration;
+    VoterRegistration public voterRegistration; // This is initialized in the constructor now
     mapping(uint256 => Proposal) public proposals;
     uint256 public proposalCount;
     bool public votingOpen;
@@ -26,13 +26,8 @@ contract Voting {
     }
     
     constructor(address _voterRegistrationAddress) {
-        voterRegistration = VoterRegistration(_voterRegistrationAddress);
+        voterRegistration = VoterRegistration(_voterRegistrationAddress); // Initialize here
         votingOpen = false;
-    }
-
-    // Removed onlyAdmin modifier
-    function initialize() external {  
-        voterRegistration.setVotingContract(address(this));
     }
     
     function addProposal(string memory _name) external onlyAdmin {
